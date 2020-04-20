@@ -5,12 +5,8 @@ from functions import create_name_of_segment
 class Test:
 
     @pytest.mark.API
-    def test_create_segment(self, api_client):
-        name = create_name_of_segment('API', 0, 1000)
-        request = api_client.create_segment(name)
-        res = request.status_code == 200
-        api_client.delete_segment(request.json()['id'])
-        assert res
+    def test_create_segment(self, segment_request):
+        assert segment_request.status_code == 200, 'Failed to create test segment'
 
     @pytest.mark.API
     def test_delete_segment(self, api_client):
